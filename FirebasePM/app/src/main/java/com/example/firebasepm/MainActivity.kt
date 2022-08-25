@@ -12,6 +12,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.firebasepm.databinding.ActivityMainBinding
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.ktx.firestore
 
 class MainActivity : AppCompatActivity() {
@@ -110,6 +111,63 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun queryFirestore(view: View?) {
+        // Solicitar datos en firestore
 
+        // 1 - query "tradicional", no real time, solicitamos datos, recibimos, fin de comunicacion
+        val collection = Firebase.firestore.collection("perritos")
+
+        val queryTask = collection.get()
+
+        queryTask.addOnSuccessListener { res ->
+            // Solicitud exitosa
+            Toast.makeText(this, "QUERY EXITOSO", Toast.LENGTH_SHORT).show()
+
+            for(docActual in res) {
+                Log.d(
+                    "FIRESTORE",
+                    "${docActual.id} ${docActual.data}"
+                )
+            }
+        }.addOnFailureListener{ error ->
+            Toast.makeText(this, "ERROR AL OBTENER DATOS", Toast.LENGTH_SHORT).show()
+
+            Log.e("FIRESTORE",  "error: $error")
+        }
+
+        // 2 - escuchando updates en tiempo real, suscribimos a una collection y escuchamos cambios
+        collection.addSnapshotListener{ datos, e ->
+            // Verificamos si hay excepcion
+            if(e != null) {
+
+                // terminar ejecucion de metodo
+                // comandos con @ - limitados a scope
+                return@addSnapshotListener
+            }
+
+            // si llegamos aqui no hubo excepcion, todo OK
+
+            Log.d("FIRESTORE", "HUBO CAMBIOS")
+
+
+            // !! - assert non-nullable
+            // declarando forzosamente al compilador
+            // que una llamada no es nula (aunque si pueda ser)
+            for(cambios in datos!!.documentChanges){
+
+                when(cambios.type){
+                    DocumentChange.Type.ADDED ->
+                        Log.d("FIRESTORE REALTIME",
+                        "agregado: ${cambios.document.data}")
+
+                    DocumentChange.Type.MODIFIED ->
+                        Log.d("FIRESTORE REALTIME",
+                            "modificado: ${cambios.document.data}")
+
+                    DocumentChange.Type.REMOVED ->
+                        Log.d("FIRESTORE REALTIME",
+                            "removido: ${cambios.document.data}")
+                }
+            }
+        }
     }
 }
