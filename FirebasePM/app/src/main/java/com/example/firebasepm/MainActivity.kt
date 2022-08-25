@@ -99,6 +99,14 @@ class MainActivity : AppCompatActivity() {
 
         // 2do paso - solicitar guardar dato
         val taskAdd = coleccion.add(perrito)
+
+        taskAdd.addOnSuccessListener { doc ->
+            Toast.makeText(this, "id: ${doc.id}", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener{ error ->
+            Toast.makeText(this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_SHORT).show()
+
+            Log.e("FIRESTORE",  "error: $error")
+        }
     }
 
     fun queryFirestore(view: View?) {
