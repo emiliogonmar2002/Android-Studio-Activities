@@ -11,6 +11,8 @@ import com.google.firebase.ktx.Firebase
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.firebasepm.databinding.ActivityMainBinding
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ktx.firestore
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,9 +87,21 @@ class MainActivity : AppCompatActivity() {
 
     fun registrarFirestore(view : View?) {
 
+        // Crear hashmaps
+        val perrito = hashMapOf(
+            "nombre" to binding.nombrePerrito.text.toString(),
+            "edad" to binding.edadPerrito.text.toString()
+        )
+
+        // 1er paso - obtener referencia a coleccion
+        val coleccion : CollectionReference =
+            Firebase.firestore.collection("perritos")
+
+        // 2do paso - solicitar guardar dato
+        val taskAdd = coleccion.add(perrito)
     }
 
     fun queryFirestore(view: View?) {
-        
+
     }
 }
