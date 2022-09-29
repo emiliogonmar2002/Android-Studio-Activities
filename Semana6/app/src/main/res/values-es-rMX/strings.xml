@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Semana6</string>
+    <string name="main_hint">NUEVO VALOR DE PREFERENCIAS</string>
+    <string name="main_guardar">GUARDAR</string>
+    <string name="main_borrar">BORRAR PREF</string>
+    <string name="main_borrar_todo">BORRAR TODAS LAS PREFS</string>
+    <string name="main_mostrar">DISPLAY PREFS</string>
+    <string name="main_toast">HOLA DE UNA VARIABLE</string>
+</resources>

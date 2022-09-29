@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.emilio.navifationcomponent.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_simpleFragment"
+            app:destination="@id/simpleFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_argsFragmen"
+            app:destination="@id/argsFragmen" />
+    </fragment>
+    <fragment
+        android:id="@+id/argsFragmen"
+        android:name="com.emilio.navifationcomponent.argsFragmen"
+        android:label="fragment_args"
+        tools:layout="@layout/fragment_args" >
+        <argument
+            android:name="nombre"
+            app:argType="string" />
+        <argument android:name="altura"
+            app:argType="float" />
+    </fragment>
+    <fragment
+        android:id="@+id/simpleFragment"
+        android:name="com.emilio.navifationcomponent.simpleFragment"
+        android:label="fragment_simple"
+        tools:layout="@layout/fragment_simple" />
+    <action android:id="@+id/action_global_mainFragment" app:destination="@id/mainFragment" />
+</navigation>

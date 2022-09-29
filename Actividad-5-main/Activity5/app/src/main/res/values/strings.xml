@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Activity5</string>
+    <string name="btn_maps">Maps</string>
+    <string name="btn_photos">Photos</string>
+    <string name="btn_clear_all">Clear All</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>

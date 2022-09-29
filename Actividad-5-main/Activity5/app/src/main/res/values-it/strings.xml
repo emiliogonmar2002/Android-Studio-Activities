@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Activitini 5</string>
+    <string name="btn_maps">Mapini</string>
+    <string name="btn_photos">Fotini</string>
+    <string name="title_activity_maps">Mapini Actinivini</string>
+    <string name="btn_clear_all">Borrini Todini</string>
+</resources>
